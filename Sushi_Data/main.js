@@ -26,10 +26,26 @@ class Plate{
     }
 
     eatRoll(roll, piece){
-        if (roll == null || piece == null){
+        if (roll == null || piece == null || roll.sushi == null){
             return;
-        }if (roll.sushi == null){ //if there is a Linked List, but there is nothing inside of it, delete
-            
+        }else if (roll.sushi.filling == piece.filling){
+            if (roll.left == null && roll.right == null){
+                roll = null;
+            }else if (roll.left == null){
+                roll = roll.right;
+            }else if (roll.right == null){
+                roll = roll.left;
+            }else{
+                store = roll.right;
+                roll = roll.left;
+                roll.right = store;
+            }
+        }else{
+            if (roll.sushi.filling > piece.filling){
+                return this.eatRoll(roll.left);
+            }else{
+                return this.eatRoll(roll.right);
+            }
         }
     }
 
@@ -39,8 +55,8 @@ class Plate{
 class Roll{
     constructor (){
         this.sushi = null; //head of linked list
-        this.before = null; //left in BST
-        this.behind = null; //right in BST
+        this.left = null;
+        this.right = null;
     }
 
     makePiece(current, filling){
