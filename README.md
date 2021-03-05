@@ -1,1 +1,1 @@
-# Work: for Random Projects and Algorithms
+# Work: for Projects and Algorithms
